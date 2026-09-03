@@ -30,11 +30,7 @@
 
     <section id="products" class="section wrap">
       <div class="section-head"><div><p class="eyebrow">COLLECTION</p><h2>热门商品</h2></div><a href="#contact">需要更多信息？ →</a></div>
-      <div class="products">
-        <article class="product"><div class="product-image tone-1">NUVORA</div><div class="product-info"><span>新品</span><h3>精选商品示例 01</h3><p>这里可以放商品的简短介绍。</p><strong>€19.90</strong></div></article>
-        <article class="product"><div class="product-image tone-2">NUVORA</div><div class="product-info"><span>推荐</span><h3>精选商品示例 02</h3><p>图片、价格和介绍以后都可以在后台修改。</p><strong>€29.90</strong></div></article>
-        <article class="product"><div class="product-image tone-3">NUVORA</div><div class="product-info"><span>精选</span><h3>精选商品示例 03</h3><p>客户只需要浏览，不提供在线付款。</p><strong>€39.90</strong></div></article>
-      </div>
+      <div id="products-list" class="products"><p>正在加载商品…</p></div>
     </section>
 
     <section id="about" class="about"><div class="wrap about-grid"><div><p class="eyebrow">ABOUT NUVORA</p><h2>把好商品<br>展示给更多人。</h2></div><p>NUVORA 是一个面向欧洲客户的商品展示平台。第一阶段专注于清晰展示产品和方便客户联系购买，未来可以继续升级为完整电商网站。</p></div></section>
@@ -43,5 +39,42 @@
   </main>
 
   <footer><div class="wrap footer"><span>© 2026 NUVORA</span><a href="admin.html">管理入口</a></div></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    const list = document.getElementById('products-list');
+    async function loadProducts() {
+      const { data, error } = await supabaseClient
+        .from('products')
+        .select('id,name,price,category,description,image_url')
+        .eq('published', true)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        list.innerHTML = '<p>商品暂时无法加载，请稍后再试。</p>';
+        console.error(error);
+        return;
+      }
+      if (!data || data.length === 0) {
+        list.innerHTML = '<p>目前还没有发布商品。</p>';
+        return;
+      }
+      list.innerHTML = data.map((p, i) => `
+        <article class="product">
+          <div class="product-image tone-${(i % 3) + 1}">${p.image_url ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name || '')}">` : 'NUVORA'}</div>
+          <div class="product-info">
+            <span>${escapeHtml(p.category || '商品')}</span>
+            <h3>${escapeHtml(p.name || '')}</h3>
+            <p>${escapeHtml(p.description || '')}</p>
+            <strong>€${Number(p.price || 0).toFixed(2)}</strong>
+          </div>
+        </article>`).join('');
+    }
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    }
+    loadProducts();
+  </script>
 </body>
 </html>
