@@ -1,80 +1,20 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NUVORA — 商品展示</title>
-  <meta name="description" content="NUVORA 商品展示网站">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NUVORA — 商品展示</title><meta name="description" content="NUVORA 商品展示网站"><link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="wrap nav">
-      <a class="brand" href="index.html"><span class="brand-mark">N</span><span>NUVORA</span></a>
-      <nav><a href="#products">商品</a><a href="#about">关于我们</a><a href="#contact">联系我们</a></nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div>
-          <p class="eyebrow">NUVORA · PRODUCT COLLECTION</p>
-          <h1>精选商品，<br><em>简单地展示。</em></h1>
-          <p class="hero-copy">这是 NUVORA 的商品展示网站。浏览商品、查看详情，需要购买时直接联系我们。</p>
-          <a class="button" href="#products">浏览商品 <span>→</span></a>
-        </div>
-        <div class="hero-card"><div class="hero-circle">N</div><p>CURATED<br>EVERYDAY GOODS</p></div>
-      </div>
-    </section>
-
-    <section id="products" class="section wrap">
-      <div class="section-head"><div><p class="eyebrow">COLLECTION</p><h2>热门商品</h2></div><a href="#contact">需要更多信息？ →</a></div>
-      <div id="products-list" class="products"><p>正在加载商品…</p></div>
-    </section>
-
-    <section id="about" class="about"><div class="wrap about-grid"><div><p class="eyebrow">ABOUT NUVORA</p><h2>把好商品<br>展示给更多人。</h2></div><p>NUVORA 是一个面向欧洲客户的商品展示平台。第一阶段专注于清晰展示产品和方便客户联系购买，未来可以继续升级为完整电商网站。</p></div></section>
-
-    <section id="contact" class="contact wrap"><p class="eyebrow">CONTACT</p><h2>想了解商品？</h2><p>欢迎通过 WhatsApp、电话或邮件联系我们。</p><div class="contact-actions"><a class="button" href="https://wa.me/34000000000">WhatsApp 联系</a><a class="text-button" href="mailto:hello@nuvora.example">发送邮件 →</a></div></section>
-  </main>
-
-  <footer><div class="wrap footer"><span>© 2026 NUVORA</span><a href="admin.html">管理入口</a></div></footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
-  <script>
-    const list = document.getElementById('products-list');
-    async function loadProducts() {
-      const { data, error } = await supabaseClient
-        .from('products')
-        .select('id,name,price,category,description,image_url')
-        .eq('published', true)
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        list.innerHTML = '<p>商品暂时无法加载，请稍后再试。</p>';
-        console.error(error);
-        return;
-      }
-      if (!data || data.length === 0) {
-        list.innerHTML = '<p>目前还没有发布商品。</p>';
-        return;
-      }
-      list.innerHTML = data.map((p, i) => `
-        <article class="product">
-          <div class="product-image tone-${(i % 3) + 1}">${p.image_url ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name || '')}">` : 'NUVORA'}</div>
-          <div class="product-info">
-            <span>${escapeHtml(p.category || '商品')}</span>
-            <h3>${escapeHtml(p.name || '')}</h3>
-            <p>${escapeHtml(p.description || '')}</p>
-            <strong>€${Number(p.price || 0).toFixed(2)}</strong>
-          </div>
-        </article>`).join('');
-    }
-    function escapeHtml(value) {
-      return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-    }
-    loadProducts();
-  </script>
-</body>
-</html>
+<header class="header"><div class="wrap nav"><a class="brand" href="index.html"><span class="brand-mark">N</span><span>NUVORA</span></a><nav><a href="#products">商品</a><a href="#about">关于我们</a><a href="#contact">联系我们</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap hero-grid"><div><p class="eyebrow">NUVORA · PRODUCT COLLECTION</p><h1>精选商品，<br><em>简单地展示。</em></h1><p class="hero-copy">这是 NUVORA 的商品展示网站。浏览商品、查看详情，需要购买时直接联系我们。</p><a class="button" href="#products">浏览商品 <span>→</span></a></div><div class="hero-card"><div class="hero-circle">N</div><p>CURATED<br>EVERYDAY GOODS</p></div></div></section>
+<section id="products" class="section wrap"><div class="section-head"><div><p class="eyebrow">COLLECTION</p><h2>热门商品</h2></div><a href="#contact">需要更多信息？ →</a></div><div id="products-list" class="products"><p>正在加载商品…</p></div></section>
+<section id="about" class="about"><div class="wrap about-grid"><div><p class="eyebrow">ABOUT NUVORA</p><h2>把好商品<br>展示给更多人。</h2></div><p>NUVORA 是一个面向欧洲客户的商品展示平台。第一阶段专注于清晰展示产品和方便客户联系购买，未来可以继续升级为完整电商网站。</p></div></section>
+<section id="contact" class="contact wrap"><p class="eyebrow">CONTACT</p><h2>想了解商品？</h2><p>欢迎通过 WhatsApp、电话或邮件联系我们。</p><div class="contact-actions"><a class="button" href="https://wa.me/34000000000">WhatsApp 联系</a><a class="text-button" href="mailto:hello@nuvora.example">发送邮件 →</a></div></section>
+</main><footer><div class="wrap footer"><span>© 2026 NUVORA</span><a href="admin.html">管理入口</a></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script>
+const list=document.getElementById('products-list');
+function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+async function loadProducts(){const {data,error}=await supabaseClient.from('products').select('id,name,price,category,description,image_url').eq('published',true).order('created_at',{ascending:false});if(error){list.innerHTML='<p>商品暂时无法加载，请稍后再试。</p>';return;}if(!data?.length){list.innerHTML='<p>目前还没有发布商品。</p>';return;}list.innerHTML=data.map((p,i)=>{const img=(p.image_url||'').split(',')[0];return `<a class="product" href="product.html?id=${encodeURIComponent(p.id)}"><div class="product-image tone-${i%3+1}">${img?`<img src="${esc(img)}" alt="${esc(p.name)}">`:'NUVORA'}</div><div class="product-info"><span>${esc(p.category||'商品')}</span><h3>${esc(p.name||'')}</h3><p>${esc(p.description||'')}</p><strong>€${Number(p.price||0).toFixed(2)}</strong><small>点击查看详情 →</small></div></a>`}).join('');}
+loadProducts();
+</script></body></html>
