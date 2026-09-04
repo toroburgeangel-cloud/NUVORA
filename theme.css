@@ -1,0 +1,17 @@
+/* NUVORA visual atmosphere upgrade */
+:root{--ink:#20221f;--paper:#f8f5ef;--sage:#dfe8dc;--sand:#efe4d2;--lavender:#e8e3ef;--line:#e4ded3}
+body{background:linear-gradient(180deg,#faf8f3 0%,#f3f0e8 48%,#fbfaf7 100%);background-attachment:fixed}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.32;background-image:radial-gradient(#b8ad9b .55px,transparent .55px);background-size:17px 17px;mask-image:linear-gradient(to bottom,black,transparent 75%);z-index:-1}
+.header{background:rgba(250,248,243,.82);border-bottom:1px solid rgba(180,170,154,.35)}
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 8% 10%,#fff 0,transparent 38%),radial-gradient(ellipse at 90% 12%,#dce8d8 0,transparent 35%),linear-gradient(135deg,#faf7f0,#eee8dd 60%,#e3eadf)}
+.hero:after{content:"";position:absolute;width:420px;height:420px;border:1px solid rgba(91,111,83,.18);border-radius:50%;right:-130px;bottom:-230px;box-shadow:0 0 0 45px rgba(255,255,255,.22),0 0 0 90px rgba(91,111,83,.08)}
+.hero-card{background:linear-gradient(145deg,#dce8d7 0%,#c6d6c0 48%,#eadfce 100%)}
+.section{position:relative}
+.section:before{content:"";display:block;width:58px;height:4px;border-radius:4px;background:#8da184;margin-bottom:22px}
+.category-list{padding:16px;background:rgba(255,255,255,.55);border:1px solid rgba(210,204,192,.7);border-radius:20px;box-shadow:0 10px 35px rgba(80,70,50,.04)}
+.product{box-shadow:0 8px 25px rgba(65,58,45,.045)}
+.product-image{background:linear-gradient(135deg,#e9eee4,#f1e7d9)}
+.about{background:linear-gradient(120deg,#202b22,#334536 55%,#53664c);position:relative;overflow:hidden}
+.about:after{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-160px;top:-180px;box-shadow:0 0 0 70px rgba(255,255,255,.035),0 0 0 140px rgba(255,255,255,.025)}
+.contact{background:linear-gradient(135deg,rgba(239,228,210,.5),rgba(232,227,239,.35));border-radius:28px;margin-top:70px;margin-bottom:70px;padding-left:6%;padding-right:6%}
+@media(max-width:700px){.contact{width:90%;padding-left:8%;padding-right:8%}}
